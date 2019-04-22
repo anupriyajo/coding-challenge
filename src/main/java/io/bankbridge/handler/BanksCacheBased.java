@@ -23,18 +23,22 @@ public class BanksCacheBased {
 
 	public static CacheManager cacheManager;
 
+	public static void setCacheManager(CacheManager cacheManager) {
+		BanksCacheBased.cacheManager = cacheManager;
+	}
+
 	public static void init() throws Exception {
 		cacheManager = CacheManagerBuilder
 				.newCacheManagerBuilder().withCache("banks", CacheConfigurationBuilder
 						.newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder.heap(10)))
 				.build();
 		cacheManager.init();
-		Cache cache = cacheManager.getCache("banks", String.class, String.class);
+		Cache cache = cacheManager.getCache("banks", String.class, BankModel.class);
 		try {
 			BankModelList models = new ObjectMapper().readValue(
 					Thread.currentThread().getContextClassLoader().getResource("banks-v1.json"), BankModelList.class);
 			for (BankModel model : models.banks) {
-				cache.put(model.bic, model.name);
+				cache.put(model.bic, model);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -44,10 +48,9 @@ public class BanksCacheBased {
 	public static String handle(Request request, Response response) {
 
 		List<Map> result = new ArrayList<>();
-		cacheManager.getCache("banks", String.class, String.class).forEach(entry -> {
+		cacheManager.getCache("banks", String.class, BankModel.class).forEach(entry -> {
 			Map map = new HashMap<>();
-			map.put("id", entry.getKey());
-			map.put("name", entry.getValue());
+			map.put(entry.getValue().getBic(), entry.getValue());
 			result.add(map);
 		});
 		try {
