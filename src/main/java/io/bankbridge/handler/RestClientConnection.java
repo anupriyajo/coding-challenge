@@ -11,22 +11,26 @@ import java.io.IOException;
 
 public class RestClientConnection {
 
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     private RestTemplate restTemplate;
 
     public RestClientConnection(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public String getBankDetails(String bic, String bankUrl) throws IOException {
+    public String getBankDetails(String bankName, String bankUrl) throws IOException {
         String result ;
         try {
             String bankData = restTemplate.getForObject(bankUrl, String.class);
             BankModel bankModel = new ObjectMapper().readValue(bankData, BankModel.class);
-            result = ParserJson.convertBankTypeToString(bic, bankModel);
+            result = ParserJson.convertBankTypeToString(bankName, bankModel);
         }catch(HttpStatusCodeException e){
-            result = convertNullValueToText(bic);
+            result = convertNullValueToText(bankName);
         }catch (RuntimeException e){
-            result = convertNullValueToText(bic);
+            result = convertNullValueToText(bankName);
         }
         return result;
     }

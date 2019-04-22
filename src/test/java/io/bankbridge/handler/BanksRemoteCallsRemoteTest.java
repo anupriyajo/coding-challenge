@@ -3,9 +3,11 @@ package io.bankbridge.handler;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -20,7 +22,7 @@ public class BanksRemoteCallsRemoteTest {
 
     @Before
     public void setUp(){
-        restClientConnection = new RestClientConnection(new RestTemplate());
+        MockitoAnnotations.initMocks(this);
         mockRemoteJson = "{\n" +
                 "\"bic\":\"1234\",\n" +
                 "\"countryCode\":\"GB\",\n" +
@@ -31,10 +33,15 @@ public class BanksRemoteCallsRemoteTest {
     // test this one
     @Test
     public void testHandle() throws IOException {
+        restClientConnection.setRestTemplate(new RestTemplate());
         assertNotNull(restClientConnection);
-        String bic = "1234";
+        String bankName = "Royal Bank of Boredom";
         String bankUrl = "http://localhost:1234/rbb";
-        when(restClientConnection.getBankDetails(bic, bankUrl))
+        HashMap<String, String> map = new HashMap<>();
+        map.put(bankName, bankUrl);
+        BanksRemoteCalls.setConfig(map);
+        BanksRemoteCalls.setRestClientConnection(restClientConnection);
+        when(restClientConnection.getBankDetails(bankName, bankUrl))
                 .thenReturn(mockRemoteJson);
         String expected = "[{\"Royal Bank of Boredom\":{\"bic\":\"1234\",\"name\":null,\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}}]";
         String actual = BanksRemoteCalls.handle(null, null);

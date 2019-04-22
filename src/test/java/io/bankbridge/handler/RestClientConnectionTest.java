@@ -48,7 +48,7 @@ public class RestClientConnectionTest {
 
     @Test
     public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs404_thenReturnsMockedObject() throws IOException {
-        String expected="{\"bic\":\"1234\",\"name\":\"Royal Bank of Boredom\",\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}";
+        String expected="{\"1234\":{\"bic\":\"Data not found\",\"name\":\"Data not found\",\"countryCode\":\"Data not found\",\"auth\":\"Data not found\"}}";
         mockServer.expect(ExpectedCount.once(),
                 requestTo("http://localhost:1234/rbb"))
                 .andExpect(method(HttpMethod.GET))
@@ -60,7 +60,7 @@ public class RestClientConnectionTest {
 
     @Test
     public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs500_thenReturnsMockedObject() throws IOException {
-        String expected="{\"bic\":\"1234\",\"name\":\"Royal Bank of Boredom\",\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}";
+        String expected="{\"1234\":{\"bic\":\"Data not found\",\"name\":\"Data not found\",\"countryCode\":\"Data not found\",\"auth\":\"Data not found\"}}";
         mockServer.expect(ExpectedCount.once(),
                 requestTo("http://localhost:1234/rbb"))
                 .andExpect(method(HttpMethod.GET))

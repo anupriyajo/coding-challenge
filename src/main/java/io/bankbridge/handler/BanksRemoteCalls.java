@@ -14,8 +14,18 @@ import spark.Response;
 
 public class BanksRemoteCalls {
 
+
 	private static Map<String, String> config;
 	private static RestClientConnection restClientConnection;
+
+	public static void setRestClientConnection(RestClientConnection restClientConnection) {
+		BanksRemoteCalls.restClientConnection = restClientConnection;
+	}
+
+
+	public static void setConfig(Map<String, String> config) {
+		BanksRemoteCalls.config = config;
+	}
 
 	public static void init() throws Exception {
 		config = new ObjectMapper()

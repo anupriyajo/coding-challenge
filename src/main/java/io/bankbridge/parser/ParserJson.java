@@ -17,7 +17,9 @@ public class ParserJson {
         bankModel.setBic("Data not found");
         bankModel.setCountryCode("Data not found");
         bankModel.setAuth("Data not found");
-        jsonInString = mapper.writeValueAsString(bankModel);
+        HashMap<String, BankModel> map = new HashMap<>();
+        map.put(bic, bankModel);
+        jsonInString = mapper.writeValueAsString(map);
         return jsonInString;
     }
 
@@ -25,6 +27,8 @@ public class ParserJson {
     public static String convertBankTypeToString(String bic, BankModel bankModel) throws JsonProcessingException {
         String jsonInString;
         ObjectMapper mapper = new ObjectMapper();
+        HashMap<String, BankModel> map = new HashMap<>();
+        map.put(bic, bankModel);
         jsonInString = mapper.writeValueAsString(bankModel);
         return jsonInString;
     }
