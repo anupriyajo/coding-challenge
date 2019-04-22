@@ -47,7 +47,7 @@ public class BanksCacheBased {
 
 	public static String handle(Request request, Response response) {
 
-		List<Map> result = new ArrayList<>();
+		List<Map<String, BankModel>> result = new ArrayList<>();
 		cacheManager.getCache("banks", String.class, BankModel.class).forEach(entry -> {
 			Map map = new HashMap<>();
 			map.put(entry.getValue().getBic(), entry.getValue());

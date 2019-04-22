@@ -9,9 +9,6 @@ import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import spark.Request;
-import spark.Response;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -36,12 +33,10 @@ public class BanksCacheBasedTest {
     }
 
     @Test
-    public void testhandle(){
+    public void testHandle(){
         assertNotNull(cacheManager);
         BanksCacheBased.setCacheManager(cacheManager);
-        Request request = null;
-        Response response = null;
-        String actual = BanksCacheBased.handle(request, response);
+        String actual = BanksCacheBased.handle(null, null);
         String expected = "[{\"1234\":{\"bic\":\"1234\",\"name\":\"Royal Bank of Boredom\",\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}}]";
         assertEquals(expected, actual);
     }
