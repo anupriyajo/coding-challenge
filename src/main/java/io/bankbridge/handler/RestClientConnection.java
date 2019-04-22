@@ -6,16 +6,15 @@ import io.bankbridge.model.BankModel;
 import io.bankbridge.parser.ParserJson;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.IOException;
 
 public class RestClientConnection {
 
+    private RestTemplate restTemplate;
+
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
-    private RestTemplate restTemplate;
 
     public RestClientConnection(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

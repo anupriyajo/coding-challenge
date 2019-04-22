@@ -43,7 +43,7 @@ public class BanksRemoteCallsRemoteTest {
         BanksRemoteCalls.setRestClientConnection(restClientConnection);
         when(restClientConnection.getBankDetails(bankName, bankUrl))
                 .thenReturn(mockRemoteJson);
-        String expected = "[{\"Royal Bank of Boredom\":{\"bic\":\"1234\",\"name\":null,\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}}]";
+        String expected = "[{\"1234\":{\"bic\":\"1234\",\"name\":null,\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}}]";
         String actual = BanksRemoteCalls.handle(null, null);
         assertEquals(expected, actual);
 

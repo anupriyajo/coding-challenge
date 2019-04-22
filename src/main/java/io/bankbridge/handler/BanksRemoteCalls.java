@@ -33,7 +33,6 @@ public class BanksRemoteCalls {
 		restClientConnection = new RestClientConnection(new RestTemplate());
 	}
 
-	// shall i remove request respinse
 	public static String handle(Request request, Response response) {
 		List<Map<String, BankModel>> result = new ArrayList<>();
 		config.entrySet().stream().forEach(entry ->{

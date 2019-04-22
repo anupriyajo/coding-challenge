@@ -1,7 +1,6 @@
 package io.bankbridge.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bankbridge.model.BankModel;
 import java.io.IOException;
@@ -23,7 +22,6 @@ public class ParserJson {
         return jsonInString;
     }
 
-    // why bic in this
     public static String convertBankTypeToString(String bic, BankModel bankModel) throws JsonProcessingException {
         String jsonInString;
         ObjectMapper mapper = new ObjectMapper();
@@ -33,12 +31,12 @@ public class ParserJson {
         return jsonInString;
     }
 
-    //check this one
+
     public static Map<String, BankModel> convertJsonToBankType(String bankData) throws IOException {
-        Map<String, BankModel> bankDetailsMap ;
+        Map<String, BankModel> bankDetailsMap = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<HashMap<String, BankModel>> reference = new TypeReference<HashMap<String, BankModel>>(){};
-        bankDetailsMap = mapper.readValue(bankData, reference);
+        BankModel bankModel = mapper.readValue(bankData, BankModel.class);
+        bankDetailsMap.put(bankModel.getBic(), bankModel);
         return bankDetailsMap;
     }
 }
