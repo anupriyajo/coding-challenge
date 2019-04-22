@@ -1,5 +1,6 @@
 package io.bankbridge.handler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bankbridge.model.BankModel;
 import io.bankbridge.parser.ParserJson;
@@ -30,7 +31,7 @@ public class RestClientConnection {
         return result;
     }
 
-    private String convertNullValueToText(String bic) {
+    private String convertNullValueToText(String bic) throws JsonProcessingException {
         return ParserJson.convertNullValueToText(bic);
     }
 }

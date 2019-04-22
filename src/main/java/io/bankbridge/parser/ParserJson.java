@@ -9,11 +9,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParserJson {
-    public static String convertNullValueToText(String bic) {
-        String jsonInString = "oooo";
+    public static String convertNullValueToText(String bic) throws JsonProcessingException {
+        String jsonInString ;
+        ObjectMapper mapper = new ObjectMapper();
+        BankModel bankModel = new BankModel();
+        bankModel.setName("Data not found");
+        bankModel.setBic("Data not found");
+        bankModel.setCountryCode("Data not found");
+        bankModel.setAuth("Data not found");
+        jsonInString = mapper.writeValueAsString(bankModel);
         return jsonInString;
     }
 
+    // why bic in this
     public static String convertBankTypeToString(String bic, BankModel bankModel) throws JsonProcessingException {
         String jsonInString;
         ObjectMapper mapper = new ObjectMapper();
@@ -21,6 +29,7 @@ public class ParserJson {
         return jsonInString;
     }
 
+    //check this one
     public static Map<String, BankModel> convertJsonToBankType(String bankData) throws IOException {
         Map<String, BankModel> bankDetailsMap ;
         ObjectMapper mapper = new ObjectMapper();

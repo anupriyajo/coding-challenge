@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bankbridge.model.BankModel;
@@ -25,6 +23,7 @@ public class BanksRemoteCalls {
 		restClientConnection = new RestClientConnection(new RestTemplate());
 	}
 
+	// shall i remove request respinse
 	public static String handle(Request request, Response response) {
 		List<Map<String, BankModel>> result = new ArrayList<>();
 		config.entrySet().stream().forEach(entry ->{
