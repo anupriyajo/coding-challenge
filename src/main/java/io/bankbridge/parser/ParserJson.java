@@ -8,6 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParserJson {
+
+    /**
+     *
+     * @param bic
+     * @return default data for bank deatils in String format
+     * @throws JsonProcessingException
+     */
     public static String convertNullValueToText(String bic) throws JsonProcessingException {
         String jsonInString ;
         ObjectMapper mapper = new ObjectMapper();
@@ -22,6 +29,13 @@ public class ParserJson {
         return jsonInString;
     }
 
+    /**
+     *
+     * @param bic
+     * @param bankModel
+     * @return bank details in String format
+     * @throws JsonProcessingException
+     */
     public static String convertBankTypeToString(String bic, BankModel bankModel) throws JsonProcessingException {
         String jsonInString;
         ObjectMapper mapper = new ObjectMapper();
@@ -32,6 +46,12 @@ public class ParserJson {
     }
 
 
+    /**
+     *
+     * @param bankData
+     * @return map having key as bic and bank details in BankModel class as value
+     * @throws IOException
+     */
     public static Map<String, BankModel> convertJsonToBankType(String bankData) throws IOException {
         Map<String, BankModel> bankDetailsMap = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();

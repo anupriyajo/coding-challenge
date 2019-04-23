@@ -16,10 +16,18 @@ public class RestClientConnection {
         this.restTemplate = restTemplate;
     }
 
+
     public RestClientConnection(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     *
+     * @param bankName
+     * @param bankUrl
+     * @return bank details in String format
+     * @throws IOException
+     */
     public String getBankDetails(String bankName, String bankUrl) throws IOException {
         String result ;
         try {
@@ -34,6 +42,12 @@ public class RestClientConnection {
         return result;
     }
 
+    /**
+     *
+     * @param bic
+     * @return Default text if bank details data can't be read
+     * @throws JsonProcessingException
+     */
     private String convertNullValueToText(String bic) throws JsonProcessingException {
         return ParserJson.convertNullValueToText(bic);
     }

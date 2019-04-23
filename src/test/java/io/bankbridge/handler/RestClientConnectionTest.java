@@ -9,9 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.IOException;
-
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
@@ -47,7 +45,7 @@ public class RestClientConnectionTest {
     }
 
     @Test
-    public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs404_thenReturnsMockedObject() throws IOException {
+    public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs404_thenReturnsMockedObjectWithErrorText() throws IOException {
         String expected="{\"1234\":{\"bic\":\"Data not found\",\"name\":\"Data not found\",\"countryCode\":\"Data not found\",\"auth\":\"Data not found\"}}";
         mockServer.expect(ExpectedCount.once(),
                 requestTo("http://localhost:1234/rbb"))
@@ -59,7 +57,7 @@ public class RestClientConnectionTest {
     }
 
     @Test
-    public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs500_thenReturnsMockedObject() throws IOException {
+    public void givenMockingIsDoneByMockRestServiceServer_whenResponseIs500_thenReturnsMockedObjectWithErrorText() throws IOException {
         String expected="{\"1234\":{\"bic\":\"Data not found\",\"name\":\"Data not found\",\"countryCode\":\"Data not found\",\"auth\":\"Data not found\"}}";
         mockServer.expect(ExpectedCount.once(),
                 requestTo("http://localhost:1234/rbb"))

@@ -14,8 +14,8 @@ import spark.Response;
 
 public class BanksRemoteCalls {
 
-
 	private static Map<String, String> config;
+
 	private static RestClientConnection restClientConnection;
 
 	public static void setRestClientConnection(RestClientConnection restClientConnection) {
@@ -27,12 +27,22 @@ public class BanksRemoteCalls {
 		BanksRemoteCalls.config = config;
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 */
 	public static void init() throws Exception {
 		config = new ObjectMapper()
 				.readValue(Thread.currentThread().getContextClassLoader().getResource("banks-v2.json"), Map.class);
 		restClientConnection = new RestClientConnection(new RestTemplate());
 	}
 
+	/**
+	 *
+	 * @param request
+	 * @param response
+	 * @return list of bankDetails
+	 */
 	public static String handle(Request request, Response response) {
 		List<Map<String, BankModel>> result = new ArrayList<>();
 		config.entrySet().stream().forEach(entry ->{
@@ -50,5 +60,4 @@ public class BanksRemoteCalls {
 			throw new RuntimeException("Error while processing request");
 		}
 	}
-
 }

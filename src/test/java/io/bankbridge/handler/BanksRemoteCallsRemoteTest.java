@@ -5,10 +5,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.IOException;
 import java.util.HashMap;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -30,7 +28,6 @@ public class BanksRemoteCallsRemoteTest {
                 "}";
     }
 
-    // test this one
     @Test
     public void testHandle() throws IOException {
         restClientConnection.setRestTemplate(new RestTemplate());
@@ -46,7 +43,5 @@ public class BanksRemoteCallsRemoteTest {
         String expected = "[{\"1234\":{\"bic\":\"1234\",\"name\":null,\"countryCode\":\"GB\",\"auth\":\"OAUTH\"}}]";
         String actual = BanksRemoteCalls.handle(null, null);
         assertEquals(expected, actual);
-
     }
-
 }

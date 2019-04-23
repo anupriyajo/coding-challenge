@@ -18,13 +18,16 @@ import spark.Response;
 
 public class BanksCacheBased {
 
-
 	public static CacheManager cacheManager;
 
 	public static void setCacheManager(CacheManager cacheManager) {
 		BanksCacheBased.cacheManager = cacheManager;
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 */
 	public static void init() throws Exception {
 		cacheManager = CacheManagerBuilder
 				.newCacheManagerBuilder().withCache("banks", CacheConfigurationBuilder
@@ -43,6 +46,12 @@ public class BanksCacheBased {
 		}
 	}
 
+	/**
+	 *
+	 * @param request
+	 * @param response
+	 * @return list of bankDetails
+	 */
 	public static String handle(Request request, Response response) {
 
 		List<Map<String, BankModel>> result = new ArrayList<>();
@@ -57,7 +66,5 @@ public class BanksCacheBased {
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException("Error while processing request");
 		}
-
 	}
-
 }
